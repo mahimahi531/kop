@@ -1,0 +1,35 @@
+<div class="newform">
+  <h2>新規登録</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="field">
+     
+      <%= f.text_field :name, placeholder:"ユーザー名", autofocus: true, class: "新規入力" %>
+    </div>
+    
+    <div class="field">
+      
+      <%= f.email_field :email, placeholder: "メールアドレス",
+      autofocus: true, autocomplete: "email", class: "新規入力" %>
+    </div>
+
+    <div class="field">
+      <% if @minimum_password_length %>
+      <% end %>
+      <%= f.password_field :password, placeholder: "パスワード（6文字以上）", autocomplete: "new-password", class: "新規入力" %>
+    </div>
+
+    <div class="field">
+
+      <%= f.password_field :password_confirmation, placeholder: "確認用パスワード", autocomplete: "new-password", class: "新規入力" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "登録", class: "登録ボタン" %>
+    </div>
+  <% end %>
+</div>
+
+

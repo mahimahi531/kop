@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Kop" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/5be3fc31eb.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+<header>
+  <div class="header-logo">
+    <h1>カラナビ</h1>
+  </div>
+  <div class="header-sign">
+        <% if user_signed_in? %>
+
+              <li>
+              <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn-sign" %>
+              </li>
+              <% else %>
+              <li>
+              <%= button_to "ログイン・新規登録", new_user_session_path, class: "btn-sign" %>
+              </li>
+              <% end %>
+        </div>
+  <div class="openbtn"><span></span><span></span><span></span></div>
+  <nav id="g-nav">
+    <div id="g-nav-list">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+      <ul>
+        <li><%= link_to "TOP", tweets_path %></li>
+        <li>
+        <%= link_to "新規投稿", new_tweet_path %>
+        </li>
+        <li>
+        <%= link_to "診断を始める", new_perfume_path, class: "link" %>
+        </li>
+        <li>
+        <%= link_to "いいねランキング", tweets_rank_path, class: "link" %>
+        </li>
+        <li>
+        <% if user_signed_in? %>
+              <li>
+              <%= link_to "マイページ", user_path(current_user.id) %>
+              </li>
+            <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main>
+<%= yield %>
+</main>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+$(".openbtn").click(function () {
+ $(this).toggleClass("active");
+ $("#g-nav").toggleClass("panelactive");
+});
+$("#g-nav a").click(function () {
+ $(".openbtn").removeClass("active");
+ $("#g-nav").removeClass("panelactive");
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
